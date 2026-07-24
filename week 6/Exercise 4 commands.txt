@@ -1,0 +1,77 @@
+Git Merge Conflict Resolution Lab - Commands
+
+Step 1: Verify main is in a clean state
+git checkout main
+git status
+
+Step 2: Create a branch "GitWork" and add hello.xml
+git branch GitWork
+git checkout GitWork
+echo "<message>Hello from GitWork branch</message>" > "week 6/hello.xml"
+
+Step 3: Update the content of hello.xml, then check status
+echo "<message>Updated content in GitWork</message>" > "week 6/hello.xml"
+git status
+
+Step 4: Commit the changes on the branch
+git add "week 6/hello.xml"
+git commit -m "Add hello.xml with content in GitWork"
+
+Step 5: Switch to main
+git checkout main
+
+Step 6: Add a DIFFERENT hello.xml on main (this creates the conflict)
+echo "<message>Hello from main branch</message>" > "week 6/hello.xml"
+
+Step 7: Commit it on main
+git add "week 6/hello.xml"
+git commit -m "Add hello.xml with different content in main"
+
+Step 8: View the graph log for all branches
+git log --oneline --graph --decorate --all
+
+Step 9: Check differences with git diff
+git diff main GitWork
+
+Step 10: Visual diff using P4Merge (skip if not installed; git diff above covers it)
+git difftool main GitWork
+
+Step 11: Merge GitWork into main - this will conflict
+git merge GitWork
+
+Step 12: Observe the conflict markup inside the file
+cat "week 6/hello.xml"
+
+Step 13: Resolve the conflict - edit the file to remove <<<<<<<, =======, >>>>>>> markers
+   and keep the content you want. Example (keeps both messages):
+cat > "week 6/hello.xml" << 'EOF'
+<message>Hello from main branch</message>
+<message>Updated content in GitWork</message>
+EOF
+
+Verify it looks clean:
+cat "week 6/hello.xml"
+
+Step 14: Stage and commit the resolved file
+git add "week 6/hello.xml"
+git commit -m "Resolve merge conflict in hello.xml"
+
+Step 15: Check status, then add backup file pattern to .gitignore
+git status
+echo "*.bak" >> "week 6/.gitignore"
+cat "week 6/.gitignore"
+
+Step 16: Commit the .gitignore change
+git add "week 6/.gitignore"
+git commit -m "Add backup file pattern to .gitignore"
+
+Step 17: List all available branches
+git branch -a
+
+Step 18: Delete the GitWork branch (already merged into main)
+git branch -d GitWork
+
+Step 19: View the final log graph
+git log --oneline --graph --decorate
+
+git push origin main

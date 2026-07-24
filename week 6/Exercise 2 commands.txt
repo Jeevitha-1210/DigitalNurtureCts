@@ -1,0 +1,28 @@
+Git Ignore Lab - Commands
+
+Step 1: Make sure you're on main and check status
+git checkout main
+git status
+
+Step 2: Create a .log file and a log folder with a file inside, in week 6
+mkdir "week 6/log"
+echo "This is a log entry" > "week 6/error.log"
+echo "Log folder test" > "week 6/log/app.log"
+
+Step 3: Check status - error.log and log/ should show as untracked
+git status
+
+Step 4: Create/update .gitignore inside week 6
+echo "*.log" >> "week 6/.gitignore"
+echo "log/" >> "week 6/.gitignore"
+
+Step 5: Verify the contents of .gitignore
+cat "week 6/.gitignore"
+
+Step 6: Check status again - error.log and log/ should now be ignored (not listed)
+git status
+
+Step 7: Stage, commit, and push
+git add "week 6/.gitignore"
+git commit -m "Update gitignore to ignore log files and log folder"
+git push origin main

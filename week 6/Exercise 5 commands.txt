@@ -1,0 +1,36 @@
+
+LAB: Clean up and Push Back to Remote Git
+
+cd GitDemo
+
+STEP 1: Verify if master is in a clean state
+
+git status
+
+STEP 2: List out all available branches
+
+git branch
+
+STEP 3: Pull the remote git repository to master
+
+git pull origin master
+
+
+STEP 4: Push pending changes to the remote repository
+
+git status
+
+git add .
+
+git commit -m "Pending changes from Git-T03-HOL_002"
+
+git push origin master
+
+STEP 5: Observe if changes reflected in remote repository
+
+git status
+
+git log
+
+git remote -v
+
